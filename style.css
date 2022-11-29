@@ -1,0 +1,40 @@
+html{
+    position: relative;
+    min-height: 100%;
+}
+body{
+    background-color: rgb(194, 240, 240);
+}
+
+#wrapper {
+    width: 1000px;
+    margin: 60px auto;
+    text-align: left;
+    padding: 20px;
+    background: #EEEEEE;
+    border: 1px solid grey;
+}
+
+.footer {
+    background-color: #ffffff;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 20px;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+
+#content .h1
+{
+    text-align: center;
+}
+
+.h1 .text-center{
+    color: white;
+}
+
+.dropdown{
+    list-style: none;
+}
