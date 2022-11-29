@@ -53,4 +53,14 @@ if ($_POST['command'] == 'Login') {
     }
     $error = true;
 }
+
+if ($_POST['command'] == 'Delete User') {
+    $userid = filter_input(INPUT_POST, 'userid', FILTER_SANITIZE_NUMBER_INT);
+    $userid = trim($userid);
+    $query = "DELETE FROM users WHERE userid = :userid";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':userid', $userid, PDO::PARAM_INT);
+    $statement->execute();
+    header('Location: admin.php');
+}
 ?>
