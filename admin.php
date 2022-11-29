@@ -1,6 +1,10 @@
 <?php
     require 'connect.php';
     session_start();
+
+    $query = "SELECT * FROM users";
+    $values = $db->prepare($query);
+    $values->execute();
 ?>
 
 <?php include 'header.php'; ?>

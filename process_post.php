@@ -1,4 +1,5 @@
 <?php
+require 'connect.php';
 
 $error = false;
 session_start();
