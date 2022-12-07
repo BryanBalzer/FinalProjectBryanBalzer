@@ -2,7 +2,7 @@
 session_start();
 require 'connect.php';
 
-$query = "SELECT * FROM genres";
+$query = "SELECT * FROM genres ORDER BY genre_name ASC";
 $values = $db->prepare($query);
 $values->execute();
 ?>

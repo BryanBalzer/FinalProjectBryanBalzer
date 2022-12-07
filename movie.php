@@ -5,7 +5,7 @@ require 'connect.php';
 $query = "SELECT *
 FROM movies
 INNER JOIN genres
-ON movies.genre_id  = genres.genre_id";
+ON movies.genre_id  = genres.genre_id ORDER BY movie_title ASC";
 $values = $db->prepare($query);
 $values->execute();
 ?>
