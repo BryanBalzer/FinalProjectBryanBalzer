@@ -44,7 +44,7 @@ $movies->execute();
                                 </select>
 
                             </p>
-                            <input type="submit" name="command" value="Update" />
+                            <input type="submit" name="command" value="Update" /> 
                             </p>
                             <p>
                                 <input type="submit" name="command" value="Delete" />

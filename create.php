@@ -36,7 +36,7 @@ $values->execute();
                         <input type="file" name="image" id="image">
                     </p>
                     <p>
-                        <input type="submit" name="command" value="Create" />
+                        <input type="submit" name="command" value="Create" /> 
                     </p>
             </fieldset>
         </form>

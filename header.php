@@ -26,6 +26,9 @@
             <li class="nav-item">
               <a class="nav-link" href="movie.php">Movies</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="genre.php">Genres</a>
+            </li>
           <?php endif ?>
           <?php if (!isset($_SESSION['loggedin'])) : ?>
             <li class="nav-item">

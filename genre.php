@@ -2,10 +2,7 @@
 session_start();
 require 'connect.php';
 
-$query = "SELECT *
-FROM movies
-INNER JOIN genres
-ON movies.genre_id  = genres.genre_id";
+$query = "SELECT * FROM genres";
 $values = $db->prepare($query);
 $values->execute();
 ?>
@@ -16,8 +13,8 @@ $values->execute();
     <div class="container py-4">
         <div class="h-100 p-5 text-bg-dark rounded-3">
             <div class="container-fluid py-5">
-                <h1 class="display-5 fw-bold">Movies</h1>
-                <button class="btn btn-primary btn-lg" type="button">Create Movie</button>
+                <h1 class="display-5 fw-bold">Genres</h1>
+                <a href="genrecreate.php" ><button class="btn btn-primary btn-lg" type="button">Create Genre</button></a>
             </div>
         </div>
         <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -25,8 +22,7 @@ $values->execute();
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><?= $row['movie_title'] ?></h5>
-                            <p class="card-text"><?= $row['genre_name'] ?></p>
+                            <h5 class="card-title"><?= $row['genre_name'] ?></h5>
                             <button type="button" class="btn btn-outline-primary">Edit</button>
                             <button type="button" class="btn btn-outline-warning">Delete</button>
                         </div>
