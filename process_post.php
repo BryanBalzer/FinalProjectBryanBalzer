@@ -75,7 +75,7 @@ if ($_POST['command'] == 'Login') {
     $error = true;
 }
 
-if ($_POST['command'] == 'Delete User') {
+if ($_POST['command'] == 'DeleteUser') {
     $userid = filter_input(INPUT_POST, 'userid', FILTER_SANITIZE_NUMBER_INT);
     $userid = trim($userid);
     $query = "DELETE FROM users WHERE userid = :userid";
@@ -83,6 +83,26 @@ if ($_POST['command'] == 'Delete User') {
     $statement->bindValue(':userid', $userid, PDO::PARAM_INT);
     $statement->execute();
     header('Location: admin.php');
+}
+
+if ($_POST['command'] == 'DeleteMovie') {
+    $userid = filter_input(INPUT_POST, 'movie_id', FILTER_SANITIZE_NUMBER_INT);
+    $userid = trim($movieid);
+    $query = "DELETE FROM movies WHERE movie_id = :movie_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':movie_id', $movieid, PDO::PARAM_INT);
+    $statement->execute();
+    header('Location: movie.php');
+}
+
+if ($_POST['command'] == 'DeleteGenre') {
+    $userid = filter_input(INPUT_POST, 'genre_id', FILTER_SANITIZE_NUMBER_INT);
+    $userid = trim($movieid);
+    $query = "DELETE FROM genres WHERE genre_id = :genre_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':genre_id', $movieid, PDO::PARAM_INT);
+    $statement->execute();
+    header('Location: genre.php');
 }
 
 if ($_POST['command'] == 'Create') {
@@ -132,6 +152,10 @@ if ($_POST['command'] == 'Create') {
                 $imagename = $_POST['post_title'] . '.' . $actual_file_extension;
                 move_uploaded_file($temporary_image_path, $new_image_path);
 
+                $image = new ImageResize($new_image_path);
+                $image->resizeToWidth(400);
+                $image->save('./images/' . $imagename);
+
                 $query = "INSERT INTO posts (userid, post_title, post_review, movie_id, imageName) values (:userid, :post_title, :post_review, :movie_id, :image)";
                 $statement = $db->prepare($query);
                 $statement->bindValue(':userid', $row['userid']);
@@ -179,7 +203,53 @@ if ($_POST['command'] == 'Update') {
     } else {
         $error = true;
     }
-}	
+}
+
+if ($_POST['command'] == 'MovieUpdate') {
+    if (filter_var($_POST['id'], FILTER_VALIDATE_INT)) {
+        if (!empty(trim($_POST['movie_title'])) && !empty(trim($_POST['genres']))) {
+            $movietitle = filter_input(INPUT_POST, 'movie_title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $genre = filter_input(INPUT_POST, 'genres', FILTER_SANITIZE_NUMBER_INT);
+            $id = $_POST['id'];
+
+            $query = "UPDATE movies SET movie_title = :movie_title, genre_id = :genre_id WHERE movie_id = :id";
+
+            $statement = $db->prepare($query);
+            $statement->bindValue(':movie_title', $movietitle);
+            $statement->bindValue(':genre_id', $genre);
+            $statement->bindValue(':id', $id, PDO::PARAM_INT);
+
+            $statement->execute();
+            header('Location: index.php');
+        } else {
+            $error = true;
+        }
+    } else {
+        $error = true;
+    }
+}
+
+if ($_POST['command'] == 'GenreUpdate') {
+    if (filter_var($_POST['id'], FILTER_VALIDATE_INT)) {
+        if (!empty(trim($_POST['genre_name']))) {
+            $genrename = filter_input(INPUT_POST, 'genre_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $id = $_POST['id'];
+
+            $query = "UPDATE genres SET genre_name = :genre_name WHERE movie_id = :id";
+
+            $statement = $db->prepare($query);
+            $statement->bindValue(':genre_name', $genrename);
+            $statement->bindValue(':id', $id, PDO::PARAM_INT);
+
+            $statement->execute();
+            header('Location: index.php');
+        } else {
+            $error = true;
+        }
+    } else {
+        $error = true;
+    }
+}
 
 ?>
 

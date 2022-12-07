@@ -2,10 +2,7 @@
 session_start();
 require 'connect.php';
 
-$query = "SELECT *
-FROM movies
-INNER JOIN genres
-ON movies.genre_id  = genres.genre_id ORDER BY movie_title ASC";
+$query = "SELECT * FROM movies JOIN genres ON movies.genre_id  = genres.genre_id";
 $values = $db->prepare($query);
 $values->execute();
 ?>
@@ -27,8 +24,8 @@ $values->execute();
                         <div class="card-body">
                             <h5 class="card-title"><?= $row['movie_title'] ?></h5>
                             <p class="card-text"><?= $row['genre_name'] ?></p>
-                            <a href="movieedit.php" button type="button" class="btn btn-outline-primary">Edit</a>
-                            <button type="button" class="btn btn-outline-warning">Delete</button>
+                            <a href="movieedit.php?id=<?= $row['movie_id'] ?>"><button type="button" class="btn btn-outline-primary">Edit</button></a>
+                            <a href="moviedelete.php" button type="button" class="btn btn-outline-warning">Delete</button></a>
                         </div>
                     </div>
                 </div>

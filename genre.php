@@ -23,8 +23,8 @@ $values->execute();
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title"><?= $row['genre_name'] ?></h5>
-                            <button type="button" class="btn btn-outline-primary">Edit</button>
-                            <button type="button" class="btn btn-outline-warning">Delete</button>
+                            <a href="genreedit.php" button type="button" class="btn btn-outline-primary">Edit</a>
+                            <a href="genredelete.php" button type="button" class="btn btn-outline-warning">Delete</a>
                         </div>
                     </div>
                 </div>

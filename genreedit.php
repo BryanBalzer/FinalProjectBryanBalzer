@@ -5,15 +5,15 @@ session_start();
 if (isset($_GET['id'])) {
     $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    $query = "SELECT * FROM movies m JOIN genres g ON m.genre_id = g.genre_id WHERE movie_id = :movie_id";
+    $query = "SELECT * FROM genres";
     $values = $db->prepare($query);
-    $values->bindValue(':movie_id', $id);
+    $values->bindValue(':genre_id', $id);
     $values->execute();
 }
 
-$query = "SELECT * FROM genres";
-$genres = $db->prepare($query);
-$genres->execute();
+// $query = "SELECT * FROM genres";
+// $genres = $db->prepare($query);
+// $genres->execute();
 
 ?>
 
@@ -25,10 +25,10 @@ $genres->execute();
                 <form action="process_post.php" method="post" class="editform" enctype="multipart/form-data">
                     <fieldset class="editreview">
                         <div class="edit">
-                            <input type="hidden" name="id" value="<?= $row['movie_id'] ?>" />
+                            <input type="hidden" name="id" value="<?= $row['genre_id'] ?>" />
                             <p>
-                                <label for="movie_title">Movie Title:</label>
-                                <input name="movie_title" id="movie_title" value="<?= $row['movie_title'] ?>" />
+                                <label for="genre_name">New Genre Name:</label>
+                                <input name="genre_name" id="genre_name" value="<?= $row['genre_name'] ?>" />
                             </p>
                             <p>
                                 <label for="genres">Genre:</label>
@@ -39,10 +39,10 @@ $genres->execute();
                                     <?php endwhile ?>
                                 </select>
                             </p>
-                            <button name="command" type="submit" value="MovieUpdate">Update</button>
+                            <button name="command" type="submit" value="GenreUpdate">Update</button>
                             </p>
                             <p>
-                                <input type="submit" name="command" value="DeleteMovie" />
+                                <input type="submit" name="command" value="Delete" />
                             </p>
                     </fieldset>
                 </form>

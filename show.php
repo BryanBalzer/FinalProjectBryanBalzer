@@ -4,24 +4,17 @@ session_start();
 
 if (isset($_GET['id'])) {
 	$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-	$query = "SELECT p.postid, p.post_title, p.post_review, p.movie_id, p.imageName, u.username FROM posts p JOIN users u ON p.userid = u.userid WHERE p.postid = :id";
+	$query = "SELECT p.postid, p.post_title, p.post_review, p.movie_id, p.imageName, u.username, g.genre_name FROM posts p JOIN users u ON p.userid = u.userid JOIN movies m ON m.movie_id = p.movie_id JOIN genres g ON g.genre_id = m.genre_id WHERE p.postid = :id";
 	$values = $db->prepare($query);
 	$values->bindValue(':id', $id);
 	$values->execute();
 }
 
-$query = "SELECT *
-FROM movies
-INNER JOIN genres
-ON movies.genre_id  = genres.genre_id";
-$genres = $db->prepare($query);
-$genres->execute();
-$genre = $genres->fetch();
-
 if (empty($_SESSION['username'])) {
 	$_SESSION['username'] = '';
 }
 ?>
+
 
 <?php if (isset($_GET['id'])) : ?>
 	<?php include 'header.php'; ?>
@@ -39,7 +32,7 @@ if (empty($_SESSION['username'])) {
 					<?php if (!empty($row['imageName'])) : ?>
 						<img src="./images/<?= $row['imageName'] ?>" alt="<?= $row['post_title'] ?>">
 					<?php endif ?>
-					<a href="search.php?search=<?= $genre['genre_name'] ?>">Search similar movies like '<?= $genre['genre_name'] ?>'</a>
+					<a href="search.php?search=<?= $row['genre_name'] ?>">Search similar movies like '<?= $row['genre_name'] ?>'</a>
 				<?php endwhile ?>
 			</div>
 		</div>

@@ -45,8 +45,7 @@ if ($_POST && !empty($_POST['title']) && !empty($_POST['movies'])) {
         </div>
         <div style="padding-left: 61px">
             <button type="submit" class="btn btn-primary">Create</button>
-        </div>    
-    </form>
+        </div>
 </div>
 
 

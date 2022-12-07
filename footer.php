@@ -1,4 +1,4 @@
-<div class="footer">
+ <div class="footer">
      <p>Use of this site constitutes acceptance of our User Agreement and Privacy Policy. © 2022 Movie Rate inc.</p>
  </div>
  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
