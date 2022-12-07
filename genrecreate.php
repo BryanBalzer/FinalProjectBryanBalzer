@@ -21,7 +21,7 @@ if ($_POST && !empty($_POST['name'])) {
 }
 ?>
 
-<?php include 'header.php'; ?>
+<?php include ('header.php'); ?>
 
 <div class="container">
     <form method="post" action="genrecreate.php">
@@ -32,8 +32,8 @@ if ($_POST && !empty($_POST['name'])) {
             </div>        
         </div>
         <div style="padding-left: 61px">
-        <button type="submit" class="btn btn-primary">Create</button>
-</div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
     </form>
 </div>
 

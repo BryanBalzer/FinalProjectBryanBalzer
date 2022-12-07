@@ -17,7 +17,7 @@ $values->execute();
         <div class="h-100 p-5 text-bg-dark rounded-3">
             <div class="container-fluid py-5">
                 <h1 class="display-5 fw-bold">Movies</h1>
-                <button class="btn btn-primary btn-lg" type="button">Create Movie</button>
+                <a href="moviecreate.php"><button class="btn btn-primary btn-lg" type="button">Create Movie</button></a>
             </div>
         </div>
         <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -27,16 +27,16 @@ $values->execute();
                         <div class="card-body">
                             <h5 class="card-title"><?= $row['movie_title'] ?></h5>
                             <p class="card-text"><?= $row['genre_name'] ?></p>
-                            <button type="button" class="btn btn-outline-primary">Edit</button>
+                            <a href="movieedit.php" button type="button" class="btn btn-outline-primary">Edit</a>
                             <button type="button" class="btn btn-outline-warning">Delete</button>
                         </div>
                     </div>
                 </div>
-
             <?php endwhile ?>
         </div>
     </div>
 
 <?php endif ?>
+
 
 <?php include 'footer.php'; ?>

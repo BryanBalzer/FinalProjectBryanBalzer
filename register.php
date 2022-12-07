@@ -16,6 +16,10 @@ session_start();
             <input type="password" class="form-control" name="password" placeholder="Password">
         </div>
         <div class="mb-3">
+            <label for="password" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" name="confirm_password" placeholder="Password">
+        </div>
+        <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
             <input type="email" class="form-control" name="email" placeholder="Email">
         </div>

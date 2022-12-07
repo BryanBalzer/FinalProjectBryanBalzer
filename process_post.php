@@ -7,7 +7,7 @@ session_start();
 if ($_POST['command'] == 'Register') {
     if (!empty($_POST['username']) || (!empty($_POST['password']))) {
         $name = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $pass = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
         $query = "SELECT username FROM users WHERE username = :username LIMIT 1";
@@ -15,17 +15,37 @@ if ($_POST['command'] == 'Register') {
         $statement->bindValue(':username', $name);
         $statement->execute();
 
-        if ($statement->rowCount() == 0) {
-            $query = "INSERT INTO users (username, password, email) values (:username, :password, :email)";
-            $statement = $db->prepare($query);
-            $statement->bindValue(':username', $name);
-            $statement->bindValue(':password', password_hash($password, PASSWORD_BCRYPT));
-            $statement->bindValue(':email', $email);
-            $statement->execute();
 
-            header('Location: index.php');
+        if (empty(trim($pass))) {
+            $password_err = "Please enter a password.";
         } else {
-            $error = true;
+            $password = trim($pass);
+        }
+
+        // Validate confirm password
+        if (empty(trim($_POST["confirm_password"]))) {
+            $confirm_password_err = "Please confirm password.";
+        } else {
+            $confirm_password = trim($_POST["confirm_password"]);
+            if (empty($password_err) && ($password != $confirm_password)) {
+                $confirm_password_err = "Password did not match.";
+            }
+        }
+
+        if (empty($password_err) && empty($confirm_password_err)) {
+
+            if ($statement->rowCount() == 0) {
+                $query = "INSERT INTO users (username, password, email) values (:username, :password, :email)";
+                $statement = $db->prepare($query);
+                $statement->bindValue(':username', $name);
+                $statement->bindValue(':password', password_hash($password, PASSWORD_BCRYPT));
+                $statement->bindValue(':email', $email);
+                $statement->execute();
+
+                header('Location: index.php');
+            }             
+            }else {
+                $error = true;
         }
     }
 }
