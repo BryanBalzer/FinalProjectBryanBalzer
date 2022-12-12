@@ -1,10 +1,10 @@
 <?php
 require 'connect.php';
-session_start();
+#session_start();
 
 if (isset($_GET['id'])) {
 	$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-	$query = "SELECT p.postid, p.post_title, p.post_review, p.movie_id, p.imageName, u.username, g.genre_name FROM posts p JOIN users u ON p.userid = u.userid JOIN movies m ON m.movie_id = p.movie_id JOIN genres g ON g.genre_id = m.genre_id WHERE p.postid = :id";
+	$query = "SELECT p.postid, p.post_title, p.post_review, p.movie_id, m.movie_title, p.imageName, u.username, g.genre_name FROM posts p JOIN users u ON p.userid = u.userid JOIN movies m ON m.movie_id = p.movie_id JOIN genres g ON g.genre_id = m.genre_id WHERE p.postid = :id";
 	$values = $db->prepare($query);
 	$values->bindValue(':id', $id);
 	$values->execute();
@@ -26,6 +26,7 @@ if (empty($_SESSION['username'])) {
 						<a href="edit.php?id=<?= $row['postid'] ?>">Edit this post!</a>
 					<?php endif ?>
 					<h2><?= $row['post_title'] ?></h2>
+					<h4><?= $row['movie_title'] ?></h4>
 					<p>
 						<?= $row['post_review'] ?>
 					</p>

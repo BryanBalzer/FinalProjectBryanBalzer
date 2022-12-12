@@ -1,10 +1,20 @@
 <?php
-session_start();
+#session_start();
 require 'connect.php';
 
-$query = "SELECT * FROM movies JOIN genres ON movies.genre_id  = genres.genre_id";
+$query = "SELECT * FROM movies JOIN genres ON movies.genre_id  = genres.genre_id ORDER BY movie_title ASC";
 $values = $db->prepare($query);
 $values->execute();
+
+if(isset($_GET['id']) )
+{
+$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$query = "DELETE FROM movies WHERE movie_id = :movie_id";
+$statement = $db->prepare($query);
+$statement->bindValue(':movie_id', $id, PDO::PARAM_INT);
+$statement->execute();
+header('Location: movie.php');
+}
 ?>
 
 <?php include 'header.php'; ?>
@@ -25,7 +35,7 @@ $values->execute();
                             <h5 class="card-title"><?= $row['movie_title'] ?></h5>
                             <p class="card-text"><?= $row['genre_name'] ?></p>
                             <a href="movieedit.php?id=<?= $row['movie_id'] ?>"><button type="button" class="btn btn-outline-primary">Edit</button></a>
-                            <a href="moviedelete.php" button type="button" class="btn btn-outline-warning">Delete</button></a>
+                            <a href="movie.php?id=<?= $row['movie_id'] ?>" button type="button" class="btn btn-outline-warning">Delete</button></a>
                         </div>
                     </div>
                 </div>

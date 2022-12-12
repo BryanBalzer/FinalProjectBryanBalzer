@@ -1,10 +1,20 @@
 <?php
-session_start();
+#session_start();
 require 'connect.php';
 
 $query = "SELECT * FROM genres ORDER BY genre_name ASC";
 $values = $db->prepare($query);
 $values->execute();
+
+if(isset($_GET['id']) )
+{
+$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$query = "DELETE FROM genres WHERE genre_id = :genre_id";
+$statement = $db->prepare($query);
+$statement->bindValue(':genre_id', $id, PDO::PARAM_INT);
+$statement->execute();
+header('Location: genre.php');
+}
 ?>
 
 <?php include 'header.php'; ?>
@@ -23,8 +33,8 @@ $values->execute();
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title"><?= $row['genre_name'] ?></h5>
-                            <a href="genreedit.php" button type="button" class="btn btn-outline-primary">Edit</a>
-                            <a href="genredelete.php" button type="button" class="btn btn-outline-warning">Delete</a>
+                            <a href="genreedit.php?id=<?= $row['genre_id'] ?>" button type="button" class="btn btn-outline-primary">Edit</a>
+                            <a href="genre.php?id=<?= $row['genre_id'] ?>" button type="button" class="btn btn-outline-warning">Delete</a>
                         </div>
                     </div>
                 </div>

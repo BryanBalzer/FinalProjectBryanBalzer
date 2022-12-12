@@ -1,6 +1,6 @@
 <?php
 require 'connect.php';
-session_start();
+#session_start();
 
 if (isset($_GET['id'])) {
     $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS);

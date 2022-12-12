@@ -1,8 +1,8 @@
 <?php
 require 'connect.php';
-session_start();
+#session_start();
 
-$query = "SELECT * FROM movies";
+$query = "SELECT * FROM movies ORDER BY movie_title ASC";
 $values = $db->prepare($query);
 $values->execute();
 ?>

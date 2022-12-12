@@ -1,6 +1,6 @@
 <?php
 require 'connect.php';
-session_start();
+#session_start();
 
 $query = "SELECT * FROM genres" ;
 $values = $db->prepare($query);

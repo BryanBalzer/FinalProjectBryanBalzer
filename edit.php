@@ -1,6 +1,8 @@
 <?php
 require 'connect.php';
-session_start();
+#session_start();
+
+
 
 if (isset($_GET['id'])) {
     $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -10,7 +12,7 @@ if (isset($_GET['id'])) {
     $values->execute();
 }
 
-$query = "SELECT * FROM movies";
+$query = "SELECT * FROM movies ORDER BY movie_title ASC";
 $movies = $db->prepare($query);
 $movies->execute();
 

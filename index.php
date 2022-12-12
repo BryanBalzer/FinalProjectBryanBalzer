@@ -1,5 +1,5 @@
 <?php
-session_start();
+#session_start();
 require 'connect.php';
 
 $sorted = false;
@@ -9,11 +9,11 @@ if (isset($_GET['sort'])) {
     $sorted = true;
 }
 
-$query = "SELECT p.post_title, p.post_review, p.date_created, p.movie_id, p.postid, u.username, p.userid, p.imageName, u.admin FROM posts p JOIN users u ON p.userid = u.userid ORDER BY p.date_created DESC LIMIT 10";
+$query = "SELECT p.post_title, p.post_review, p.date_created, p.movie_id, p.postid, u.username, p.userid, p.imageName, u.admin FROM posts p JOIN users u ON p.userid = u.userid ORDER BY p.date_created DESC LIMIT 20";
 $values = $db->prepare($query);
 $values->execute();
 
-$queryasc = "SELECT p.post_title, p.post_review, p.date_created, p.movie_id, p.postid, u.username, p.userid, p.imageName, u.admin FROM posts p JOIN users u ON p.userid = u.userid ORDER BY p.date_created ASC LIMIT 10";
+$queryasc = "SELECT p.post_title, p.post_review, p.date_created, p.movie_id, p.postid, u.username, p.userid, p.imageName, u.admin FROM posts p JOIN users u ON p.userid = u.userid ORDER BY p.date_created ASC LIMIT 20";
 $valuesasc = $db->prepare($queryasc);
 $valuesasc->execute();
 ?>

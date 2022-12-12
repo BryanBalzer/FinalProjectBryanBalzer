@@ -1,6 +1,6 @@
 <?php
 require 'connect.php';
-session_start();
+#session_start();
 
 if (isset($_GET['search'])) {
     $string = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -8,7 +8,7 @@ if (isset($_GET['search'])) {
     $string = htmlspecialchars($string);
     $string = '%' . $string . '%';
 
-    $query = "SELECT * FROM users u JOIN posts p ON p.userid = u.userid JOIN movies m ON m.movie_id = p.movie_id JOIN genres g ON g.genre_id = m.genre_id WHERE u.username LIKE :string OR p.post_title LIKE :string OR g.genre_name LIKE :string ORDER BY p.date_created DESC";
+    $query = "SELECT * FROM users u JOIN posts p ON p.userid = u.userid JOIN movies m ON m.movie_id = p.movie_id JOIN genres g ON g.genre_id = m.genre_id WHERE u.username LIKE :string OR p.post_title LIKE :string OR g.genre_name LIKE :string OR m.movie_title LIKE :string ORDER BY p.date_created DESC";
     $statement = $db->prepare($query);
     $statement->bindValue(':string', $string);
     $statement->execute();
