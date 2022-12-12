@@ -24,7 +24,7 @@ header('Location: genre.php');
         <div class="h-100 p-5 text-bg-dark rounded-3">
             <div class="container-fluid py-5">
                 <h1 class="display-5 fw-bold">Genres</h1>
-                <a href="genrecreate.php" ><button class="btn btn-primary btn-lg" type="button">Create Genre</button></a>
+                <a class="btn btn-primary" href="genrecreate.php" role="button">Create Genre</a>
             </div>
         </div>
         <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -33,8 +33,8 @@ header('Location: genre.php');
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title"><?= $row['genre_name'] ?></h5>
-                            <a href="genreedit.php?id=<?= $row['genre_id'] ?>" button type="button" class="btn btn-outline-primary">Edit</a>
-                            <a href="genre.php?id=<?= $row['genre_id'] ?>" button type="button" class="btn btn-outline-warning">Delete</a>
+                            <a class="btn btn-primary" href="genreedit.php?id=<?= $row['genre_id'] ?>" role="button">Edit</a>
+                            <a class="btn btn-primary" href="genre.php?id=<?= $row['genre_id'] ?>" role="button">Delete</a>
                         </div>
                     </div>
                 </div>

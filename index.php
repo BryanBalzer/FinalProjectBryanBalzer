@@ -25,7 +25,7 @@ $valuesasc->execute();
         <?php if ($sorted) : ?>
             <h1 class="font-weight-bold">Sorted by oldest posts!</h1>
             <?php while ($row = $valuesasc->fetch()) : ?>
-                <h2 class="font-italic" class="text-dark">
+                <h2 class="font-italic text-dark">
                     <a href="show.php?id=<?= $row['postid'] ?>"><?= $row['post_title'] ?></a>
                 </h2>
                 <p>
@@ -39,7 +39,7 @@ $valuesasc->execute();
         <?php else : ?>
             <h1 class="font-weight-bold">Sorted by newest posts!</h1>
             <?php while ($row = $values->fetch()) : ?>  
-                <h2 class="font-italic" class="text-dark">
+                <h2 class="font-italic text-dark">
                     <a href="show.php?id=<?= $row['postid'] ?>"><?= $row['post_title'] ?></a>
                 </h2>
                 <p>

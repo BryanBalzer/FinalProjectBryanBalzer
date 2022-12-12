@@ -60,7 +60,7 @@ if ($_POST['command'] == 'Login') {
     if (!empty($_POST['username'])) {
         $name         = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $password     = $_POST['password'];
-        $query = "SELECT user_id, username, password, admin FROM users WHERE username = :username";
+        $query = "SELECT userid, username, password, admin FROM users WHERE username = :username";
         $values = $db->prepare($query);
         $values->bindValue(':username', $name);
         $values->execute();
@@ -68,7 +68,7 @@ if ($_POST['command'] == 'Login') {
         $row = $values->fetch();
 
         if ($name == $row['username'] && password_verify($password, $row['password'])) {
-            $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['userid'] = $row['userid'];
             $_SESSION['username'] = $name;
             $_SESSION['loggedin'] = 1;
             if ($row['admin'] == 1) {

@@ -14,10 +14,10 @@ $values->execute();
         <form action="process_post.php" method="post" class="createform" enctype="multipart/form-data">
             <fieldset class="createreview">
                 <div class="create">
-                    <input type="hidden" name="username" value="<?= $_SESSION['username'] ?>" />
+                    <input type="hidden" name="username" value="<?= $_SESSION['username'] ?>">
                     <p>
                         <label for="post_title">Post Title</label>
-                        <input name="post_title" id="post_title" />
+                        <input name="post_title" id="post_title">
                     </p>
                     <p>
                         <label for="post_review">Review</label>
@@ -25,7 +25,7 @@ $values->execute();
                     </p>
                     <p>
                         <label for="movies">Movie</label>
-                        <select name="movies">
+                        <select name="movies" id="movies">
                             <?php while ($row = $values->fetch()) : ?>
                                 <option value="<?= $row['movie_id'] ?>"><?= $row['movie_title'] ?></option>
                             <?php endwhile ?>
@@ -36,8 +36,9 @@ $values->execute();
                         <input type="file" name="image" id="image">
                     </p>
                     <p>
-                        <input type="submit" name="command" value="Create" />
+                        <input type="submit" name="command" value="Create">
                     </p>
+                </div>    
             </fieldset>
         </form>
     </div>

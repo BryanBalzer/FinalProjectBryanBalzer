@@ -19,11 +19,11 @@
                         <?php if ($row['admin'] == 0) : ?>
                             <option value="<?= $row['userid'] ?>"><?= $row['username'] ?></option>
                         <?php endif ?>
-                        <a href="editUser.php?id=<?= $row['userid'] ?>"> <button type="button" class="btn btn-outline-primary">Edit</button></a>
+                        
                     <?php endwhile ?>
-
-                    <input type="submit" name="command" value="DeleteUser" />
                 </select>
+                    <input type="submit" name="command" value="DeleteUser">
+                
             </form>
             
         </div>

@@ -1,7 +1,7 @@
 <?php
-    #session_start();
+    session_start();
 
-    if(isset($_SESSION['loggedin']))
+    if($_SESSION['loggedin'] == 1)
     {
         session_destroy();
     }
